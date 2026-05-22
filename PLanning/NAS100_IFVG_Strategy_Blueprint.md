@@ -1,4 +1,4 @@
-# NAS100 IFVG + Multi-TF EMA Strategy Blueprint
+User: # NAS100 IFVG + Multi-TF EMA Strategy Blueprint
 
 ## Overview
 
@@ -87,7 +87,7 @@ Low
 Close
 Volume
 ```
-
+for downloading data we can use ftmo-demo-server login id and password 
 Index must be timezone-aware.
 
 ---
@@ -119,8 +119,6 @@ EMA 50
 ```
 
 for:
-
-- 5m
 - 15m
 - 30m
 - 60m
@@ -198,44 +196,11 @@ The strategy DOES NOT chase breakouts.
 After trend alignment:
 
 - wait for temporary counter-trend move
-- look for liquidity sweep
+- look for fvg in counter trade
 - then search for IFVG continuation
 
 ---
 
-# Swing Detection
-
-## Swing Low
-
-For longs:
-
-```python
-rolling_low = low.rolling(N).min()
-```
-
-A pullback exists when:
-
-```python
-price dips below recent swing low
-```
-
----
-
-## Swing High
-
-For shorts:
-
-```python
-rolling_high = high.rolling(N).max()
-```
-
-A pullback exists when:
-
-```python
-price rises above recent swing high
-```
-
----
 
 # Fair Value Gap (FVG)
 
@@ -282,7 +247,7 @@ Candle3 High
 FVG must form:
 
 ```text
-during or after pullback
+during  pullback on offisite side of trend
 ```
 
 NOT randomly.
@@ -377,7 +342,7 @@ The system should internally track setup state.
 WAIT_BIAS
 → WAIT_PULLBACK
 → WAIT_BEARISH_FVG
-→ WAIT_IFVG_CONFIRMATION
+→ WAIT_IFVG_CONFIRMATION on close above FVG
 → ENTER_LONG
 → MANAGE_TRADE
 → EXIT
@@ -391,7 +356,7 @@ WAIT_BIAS
 WAIT_BIAS
 → WAIT_PULLBACK
 → WAIT_BULLISH_FVG
-→ WAIT_IFVG_CONFIRMATION
+→ WAIT_IFVG_CONFIRMATION on close below fvg
 → ENTER_SHORT
 → MANAGE_TRADE
 → EXIT
@@ -416,18 +381,6 @@ Fixed.
 Only one active trade allowed.
 
 ---
-
-## Optional Future Filters
-
-Potential additions:
-
-- ATR filter
-- News filter
-- AVWAP alignment
-- Session VWAP
-- SMT divergence
-- Volume spike confirmation
-- EMA slope filter
 
 ---
 
@@ -501,7 +454,15 @@ instead of pure vectorization.
 - Max drawdown
 - Total return
 - Expectancy
-
+- monte carlo scenerio
+- win rate by month(win/loss percentage)
+- win rate by hours
+- win rate by days
+- Time to recover dradown
+- no of drawdown phases in particular time
+- max consecutive wins/loss
+- avg consecutive loss/win
+- long short trade percent and win-rate
 ---
 
 ## Trade Log
@@ -530,6 +491,7 @@ Per-trade:
 - EMA overlay
 - IFVG confirmation
 
+
 ---
 
 # Chart Example 1 — Long IFVG Continuation
@@ -541,7 +503,7 @@ This example shows:
 - IFVG inversion
 - 2R continuation move
 
-![Chart Example 1](Screenshot%202026-05-22%20213725.png)
+![alt text](<Screenshot 2026-05-22 213725.png>)
 
 ---
 
@@ -555,8 +517,7 @@ This example highlights:
 - Stop loss
 - 2R target
 
-![Chart Example 2](Screenshot%202026-05-22%20213741.png)
-
+![alt text](<Screenshot 2026-05-22 213741.png>)
 ---
 
 # Strategy Philosophy
@@ -601,3 +562,21 @@ Any coding model implementing this strategy should preserve:
 3. multi-timeframe EMA alignment
 4. session filter
 5. fixed 2R risk model
+Follow proper coding standard seperation of concern
+
+Claude: I've reviewed your comprehensive NAS100 IFVG strategy blueprint. It's well-structured and deterministic—solid foundation for implementation.
+
+Before I start coding, what would help most right now:
+
+1. **Design the architecture** (module structure, state machine design, data pipeline) and show you the plan for approval?
+2. **Jump straight to implementation** with the full codebase?
+3. **Start with a specific component** (e.g., data pipeline, FVG detection, state machine)?
+4. **Something else** (backtesting setup, performance metrics, visualization)?
+
+The strategy is event-driven (state machine) + statistical execution (vectorbt), so the modular approach matters. I'd recommend EnterPlanMode to align on architecture before writing code—this prevents rework if you have specific preferences on structure, naming, or file organization.
+
+What's your preference?
+
+User: create mark down file of my prompt
+
+Claude: Error: Error during execution
