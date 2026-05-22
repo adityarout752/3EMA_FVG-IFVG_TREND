@@ -1,0 +1,21 @@
+# Strategy runtime configuration
+instrument: "NAS100"
+base_timeframe: "5min"
+ema_length: 50
+higher_timeframes:
+  - "15min"
+  - "30min"
+  - "60min"
+
+session:
+  timezone: "US/Eastern"
+  start: "09:00"
+  end: "13:30"
+
+risk:
+  reward_ratio: 2.0
+  one_trade_at_a_time: true
+
+data:
+  provider: "yfinance"
+  symbol: "NQ=F"
