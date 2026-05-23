@@ -9,7 +9,13 @@ import pandas as pd
 import yaml
 
 from src.analytics.monte_carlo import bootstrap_total_return_distribution
-from src.data.loader import load_5m_data_from_csv, load_5m_data_from_yfinance, save_dataframe
+from src.data.loader import (
+    load_5m_data_from_csv,
+    load_5m_data_from_mt5,
+    load_5m_data_from_yfinance,
+    resolve_mt5_credentials,
+    save_dataframe,
+)
 from src.data.timezone_utils import ensure_timezone
 from src.features.bias_engine import add_bias_columns
 from src.features.ema import attach_htf_ema_columns
@@ -57,8 +63,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run NAS100 IFVG strategy backtest.")
     parser.add_argument("--config", default="config/strategy.yaml", help="Path to strategy config yaml.")
     parser.add_argument("--csv", default="", help="Path to local OHLCV CSV file.")
-    parser.add_argument("--start", default="", help="Start datetime ISO format for yfinance.")
-    parser.add_argument("--end", default="", help="End datetime ISO format for yfinance.")
+    parser.add_argument("--start", default="", help="Start datetime ISO format for market data pull.")
+    parser.add_argument("--end", default="", help="End datetime ISO format for market data pull.")
     return parser.parse_args()
 
 
@@ -68,17 +74,38 @@ def main() -> None:
     config = load_config(args.config)
     timezone_name = config["session"]["timezone"]
 
+    data_cfg = config.get("data", {})
+    provider = str(data_cfg.get("provider", "ftmo_mt5")).lower()
+
     if args.csv:
         candles = load_5m_data_from_csv(args.csv, timezone_name=timezone_name)
     else:
         if not args.start or not args.end:
             raise ValueError("When --csv is not provided, both --start and --end are required.")
-        candles = load_5m_data_from_yfinance(
-            symbol=config["data"]["symbol"],
-            start=datetime.fromisoformat(args.start),
-            end=datetime.fromisoformat(args.end),
-            target_timezone=timezone_name,
-        )
+        start_dt = datetime.fromisoformat(args.start)
+        end_dt = datetime.fromisoformat(args.end)
+
+        if provider in {"ftmo", "mt5", "ftmo_mt5"}:
+            creds = resolve_mt5_credentials(data_cfg)
+            candles = load_5m_data_from_mt5(
+                symbol=data_cfg["symbol"],
+                start=start_dt,
+                end=end_dt,
+                target_timezone=timezone_name,
+                login=creds["login"],
+                password=creds["password"],
+                server=creds["server"],
+                terminal_path=creds["terminal_path"],
+            )
+        elif provider == "yfinance":
+            candles = load_5m_data_from_yfinance(
+                symbol=data_cfg["symbol"],
+                start=start_dt,
+                end=end_dt,
+                target_timezone=timezone_name,
+            )
+        else:
+            raise ValueError(f"Unsupported data provider in config: {provider}")
 
     candles = ensure_timezone(candles, timezone_name=timezone_name)
     feature_df = build_feature_dataframe(candles, config)
@@ -118,4 +145,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

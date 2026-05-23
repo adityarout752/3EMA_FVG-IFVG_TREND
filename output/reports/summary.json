@@ -1,0 +1,93 @@
+{
+  "metrics": {
+    "total_trades": 21,
+    "win_rate_pct": 38.095238095238095,
+    "profit_factor": 1.124656241021229,
+    "expectancy_r": 0.05816887705153109,
+    "long_trade_pct": 85.71428571428571,
+    "short_trade_pct": 14.285714285714285,
+    "long_win_rate_pct": 38.88888888888889,
+    "short_win_rate_pct": 33.33333333333333,
+    "max_drawdown_pct": -0.8013466820940063,
+    "drawdown_phase_count": 1,
+    "avg_bars_to_recover": NaN,
+    "total_return_pct": 0.08000633574218874,
+    "sharpe_proxy": 0.03232554978172962,
+    "max_consecutive_wins": 2,
+    "max_consecutive_losses": 3,
+    "avg_consecutive_wins": 1.1428571428571428,
+    "avg_consecutive_losses": 1.625
+  },
+  "win_rate_by_month": [
+    {
+      "month": "2026-04",
+      "win_rate_pct": 38.095238095238095
+    }
+  ],
+  "win_rate_by_hour": [
+    {
+      "hour": 9,
+      "win_rate_pct": 0.0
+    },
+    {
+      "hour": 10,
+      "win_rate_pct": 60.0
+    },
+    {
+      "hour": 11,
+      "win_rate_pct": 33.33333333333333
+    },
+    {
+      "hour": 12,
+      "win_rate_pct": 33.33333333333333
+    },
+    {
+      "hour": 13,
+      "win_rate_pct": 40.0
+    }
+  ],
+  "win_rate_by_weekday": [
+    {
+      "weekday": "Friday",
+      "win_rate_pct": 50.0
+    },
+    {
+      "weekday": "Monday",
+      "win_rate_pct": 0.0
+    },
+    {
+      "weekday": "Thursday",
+      "win_rate_pct": 40.0
+    },
+    {
+      "weekday": "Tuesday",
+      "win_rate_pct": 100.0
+    },
+    {
+      "weekday": "Wednesday",
+      "win_rate_pct": 33.33333333333333
+    }
+  ],
+  "monte_carlo": {
+    "scenario": {
+      "count": 1000.0,
+      "mean": 500.5,
+      "std": 288.8194360957494,
+      "min": 1.0,
+      "25%": 250.75,
+      "50%": 500.5,
+      "75%": 750.25,
+      "max": 1000.0
+    },
+    "total_return_pct": {
+      "count": 1000.0,
+      "mean": 0.06544299766690875,
+      "std": 0.5485519054583211,
+      "min": -1.5955838461175431,
+      "25%": -0.3058516572330999,
+      "50%": 0.06368664785454392,
+      "75%": 0.4406037902972504,
+      "max": 1.8261234339937982
+    }
+  }
+}

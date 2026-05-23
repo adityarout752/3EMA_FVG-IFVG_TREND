@@ -15,6 +15,13 @@ Or fetch from yfinance:
 python -m src.app.run_backtest --start 2026-01-01T00:00:00 --end 2026-03-01T00:00:00
 ```
 
+FTMO/MT5 (default provider in config):
+
+```bash
+# set env vars first: FTMO_LOGIN, FTMO_PASSWORD, FTMO_SERVER, MT5_TERMINAL_PATH (optional)
+python -m src.app.run_backtest --start 2026-01-01T00:00:00 --end 2026-03-01T00:00:00
+```
+
 ## Outputs
 
 - `output/trades/trade_log.csv`
@@ -22,4 +29,3 @@ python -m src.app.run_backtest --start 2026-01-01T00:00:00 --end 2026-03-01T00:0
 - `output/reports/monte_carlo.csv` (if trades exist)
 - `output/charts/entries.png`
 - `output/charts/equity_curve.png` (if vectorbt installed)
-

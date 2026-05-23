@@ -2,6 +2,7 @@ pandas>=2.2.0
 numpy>=1.26.0
 vectorbt>=0.26.0
 yfinance>=0.2.40
+MetaTrader5>=5.0.45
 PyYAML>=6.0.1
 matplotlib>=3.8.0
 plotly>=5.22.0
