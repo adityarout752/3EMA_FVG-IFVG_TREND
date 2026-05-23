@@ -8,7 +8,10 @@ def compute_win_rate_by_month(trades_df: pd.DataFrame) -> pd.DataFrame:
     if trades_df.empty:
         return pd.DataFrame(columns=["month", "win_rate_pct"])
     temp = trades_df.copy()
-    temp["month"] = pd.to_datetime(temp["entry_time"]).dt.to_period("M").astype(str)
+    entry_dt = pd.to_datetime(temp["entry_time"])
+    if getattr(entry_dt.dt, "tz", None) is not None:
+        entry_dt = entry_dt.dt.tz_localize(None)
+    temp["month"] = entry_dt.dt.to_period("M").astype(str)
     out = temp.groupby("month")["pnl"].apply(lambda s: (s > 0).mean() * 100.0).reset_index()
     return out.rename(columns={"pnl": "win_rate_pct"})
 
@@ -31,4 +34,3 @@ def compute_win_rate_by_weekday(trades_df: pd.DataFrame) -> pd.DataFrame:
     temp["weekday"] = pd.to_datetime(temp["entry_time"]).dt.day_name()
     out = temp.groupby("weekday")["pnl"].apply(lambda s: (s > 0).mean() * 100.0).reset_index()
     return out.rename(columns={"pnl": "win_rate_pct"})
-

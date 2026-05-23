@@ -26,6 +26,7 @@ python -m src.app.run_backtest --start 2026-01-01T00:00:00 --end 2026-03-01T00:0
 
 - `output/trades/trade_log.csv`
 - `output/reports/summary.json`
+- `output/reports/report.html`
 - `output/reports/monte_carlo.csv` (if trades exist)
 - `output/charts/entries.png`
 - `output/charts/equity_curve.png` (if vectorbt installed)

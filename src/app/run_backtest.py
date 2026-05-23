@@ -23,6 +23,7 @@ from src.features.fvg import add_fvg_columns
 from src.features.ifvg import add_ifvg_confirmation_columns
 from src.features.session_filter import add_session_flag
 from src.reporting.exporter import export_dataframe, export_json
+from src.reporting.html_report import build_html_report
 from src.reporting.plots import plot_equity_curve, plot_price_with_entries
 from src.reporting.summary_report import build_summary_payload
 from src.reporting.trade_log import build_trade_log
@@ -136,11 +137,21 @@ def main() -> None:
     if not equity_curve.empty:
         plot_equity_curve(equity_curve, output_path="output/charts/equity_curve.png")
 
+    build_html_report(
+        summary_payload=summary,
+        trade_log_df=trade_log,
+        monte_carlo_df=monte_carlo_df,
+        output_path="output/reports/report.html",
+        entries_chart_path="../charts/entries.png",
+        equity_chart_path="../charts/equity_curve.png",
+    )
+
     Path("output/reports").mkdir(parents=True, exist_ok=True)
     print("Backtest completed.")
     print(f"Processed candles: {len(feature_df)}")
     print(f"Closed trades: {len(trade_log)}")
     print("Reports saved under output/.")
+    print("HTML report: output/reports/report.html")
 
 
 if __name__ == "__main__":

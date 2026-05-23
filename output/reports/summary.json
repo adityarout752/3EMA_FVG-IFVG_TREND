@@ -1,71 +1,87 @@
 {
   "metrics": {
-    "total_trades": 21,
-    "win_rate_pct": 38.095238095238095,
-    "profit_factor": 1.124656241021229,
-    "expectancy_r": 0.05816887705153109,
-    "long_trade_pct": 85.71428571428571,
-    "short_trade_pct": 14.285714285714285,
-    "long_win_rate_pct": 38.88888888888889,
-    "short_win_rate_pct": 33.33333333333333,
-    "max_drawdown_pct": -0.8013466820940063,
-    "drawdown_phase_count": 1,
-    "avg_bars_to_recover": NaN,
-    "total_return_pct": 0.08000633574218874,
-    "sharpe_proxy": 0.03232554978172962,
-    "max_consecutive_wins": 2,
-    "max_consecutive_losses": 3,
-    "avg_consecutive_wins": 1.1428571428571428,
-    "avg_consecutive_losses": 1.625
+    "total_trades": 97,
+    "win_rate_pct": 28.865979381443296,
+    "profit_factor": 0.754491791684237,
+    "expectancy_r": -0.17129500618160287,
+    "long_trade_pct": 62.88659793814433,
+    "short_trade_pct": 37.11340206185567,
+    "long_win_rate_pct": 31.147540983606557,
+    "short_win_rate_pct": 25.0,
+    "max_drawdown_pct": -2.6878750495023307,
+    "drawdown_phase_count": 9,
+    "avg_bars_to_recover": 808.75,
+    "total_return_pct": -1.5285200326988435,
+    "sharpe_proxy": -0.11266869017943053,
+    "max_consecutive_wins": 3,
+    "max_consecutive_losses": 11,
+    "avg_consecutive_wins": 1.3333333333333333,
+    "avg_consecutive_losses": 3.2857142857142856
   },
   "win_rate_by_month": [
     {
+      "month": "2026-01",
+      "win_rate_pct": 23.809523809523807
+    },
+    {
+      "month": "2026-02",
+      "win_rate_pct": 50.0
+    },
+    {
+      "month": "2026-03",
+      "win_rate_pct": 13.043478260869565
+    },
+    {
       "month": "2026-04",
-      "win_rate_pct": 38.095238095238095
+      "win_rate_pct": 36.36363636363637
+    },
+    {
+      "month": "2026-05",
+      "win_rate_pct": 29.411764705882355
     }
   ],
   "win_rate_by_hour": [
     {
       "hour": 9,
-      "win_rate_pct": 0.0
+      "win_rate_pct": 16.666666666666664
     },
     {
       "hour": 10,
-      "win_rate_pct": 60.0
+      "win_rate_pct": 36.84210526315789
     },
     {
       "hour": 11,
-      "win_rate_pct": 33.33333333333333
+      "win_rate_pct": 22.727272727272727
     },
     {
       "hour": 12,
-      "win_rate_pct": 33.33333333333333
+      "win_rate_pct": 37.5
     },
     {
       "hour": 13,
-      "win_rate_pct": 40.0
+      "win_rate_pct": 25.0
     }
   ],
   "win_rate_by_weekday": [
     {
       "weekday": "Friday",
-      "win_rate_pct": 50.0
+      "win_rate_pct": 31.25
     },
     {
       "weekday": "Monday",
-      "win_rate_pct": 0.0
+      "win_rate_pct": 31.57894736842105
     },
     {
       "weekday": "Thursday",
-      "win_rate_pct": 40.0
+      "win_rate_pct": 20.0
     },
     {
       "weekday": "Tuesday",
-      "win_rate_pct": 100.0
+      "win_rate_pct": 26.31578947368421
     },
     {
       "weekday": "Wednesday",
-      "win_rate_pct": 33.33333333333333
+      "win_rate_pct": 34.78260869565217
     }
   ],
   "monte_carlo": {
@@ -81,13 +97,13 @@
     },
     "total_return_pct": {
       "count": 1000.0,
-      "mean": 0.06544299766690875,
-      "std": 0.5485519054583211,
-      "min": -1.5955838461175431,
-      "25%": -0.3058516572330999,
-      "50%": 0.06368664785454392,
-      "75%": 0.4406037902972504,
-      "max": 1.8261234339937982
+      "mean": -1.4556814543725396,
+      "std": 1.3567547845881456,
+      "min": -5.451738394351535,
+      "25%": -2.373053105926781,
+      "50%": -1.485645025614546,
+      "75%": -0.5387697285688109,
+      "max": 2.9980888010012308
     }
   }
 }
